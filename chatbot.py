@@ -1,9 +1,9 @@
+import nltk
+import operator
 from chatterbot import ChatBot
 from pythonosc import osc_message_builder
 from pythonosc import udp_client
 from nltk.sentiment import SentimentIntensityAnalyzer
-import nltk
-import operator
 
 
 def run_Bot(text):
