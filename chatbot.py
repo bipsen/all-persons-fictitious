@@ -6,26 +6,26 @@ import operator
 
 
 def run_Bot(text):
-    """This is the main function to run the chatbot, analyse 
+    """This is the main function to run the chatbot, analyse
     the responses with nltk and send OSC messages to pure data.
     """
-    
-    #Get chatbot response from the user input.
-    bot_response = chatbot.get_response(text).text 
-    
-    #Print response in bold.
+
+    # Get chatbot response from the user input.
+    bot_response = chatbot.get_response(text).text
+
+    # Print response in bold.
     print('\033[1m' + bot_response + '\033[0m')
-    
-    #Get polarity score from chatbot response.
+
+    # Get polarity score from chatbot response.
     analysis = vader_analyzer.polarity_scores(text)
-    
-    #change polarity score relatively to a audible frequency. 
+
+    # Change polarity score relatively to a audible frequency.
     freq = (analysis['compound'] - -1) / (1 - -1) * (800 - 200) + 200
-    
-    #Send OSC message, to be listened to by pd.
+
+    # Send OSC message, to be listened to by pd.
     client.send_message("/filter", freq)
-    
-    
+
+
 # Set up chatbot.
 chatbot = ChatBot(
     'Ron Obvious',
@@ -54,4 +54,3 @@ while True:
         break
     else:
         run_Bot(user_response)
-
