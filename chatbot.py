@@ -1,5 +1,6 @@
 import nltk
 import operator
+import csv
 from chatterbot import ChatBot
 from pythonosc import osc_message_builder
 from pythonosc import udp_client
@@ -25,6 +26,9 @@ def run_Bot(text):
 
     # Send OSC message, to be listened to by pd.
     client.send_message("/filter", freq)
+    
+    # Log conversation.
+    convo_log.update({text:bot_response})
 
 
 # Set up chatbot.
@@ -42,6 +46,9 @@ nltk.download('vader_lexicon')
 # Set up sentiment analyzer.
 vader_analyzer = SentimentIntensityAnalyzer()
 
+# Set up dict to log conversation.
+convo_log = {}
+
 # Set up OSC client.
 ip = 'localhost'
 port = 9000
@@ -52,6 +59,13 @@ client = udp_client.SimpleUDPClient(ip, port)
 while True:
     user_response = input('Talk (empty to exit): ')
     if user_response == 'exit':   # Exit on 'exit' string.
+        
+        # Save conversation log.
+        with open('conversation_log.csv','w') as f:
+            w = csv.writer(f)
+            w.writerows(convo_log.items())
+        
         break
+
     else:
         run_Bot(user_response)
