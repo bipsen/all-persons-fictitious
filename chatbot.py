@@ -52,7 +52,7 @@ client = udp_client.SimpleUDPClient(ip, port)
 
 # Run the chatbot.
 while True:
-    user_response = input('Talk (empty to exit): ')
+    user_response = input("Talk ('exit' to exit): ")
     if user_response == 'exit':   # Exit on 'exit' string.
         
         # Save conversation log.
