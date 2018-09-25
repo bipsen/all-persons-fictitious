@@ -16,7 +16,7 @@ def run_Bot(text):
     bot_response = chatbot.get_response(text).text
 
     # Print response in bold.
-    print('\033[1m' + bot_response + '\033[0m')
+    print(bot_response)
 
     # Get polarity score from chatbot response.
     analysis = vader_analyzer.polarity_scores(text)
