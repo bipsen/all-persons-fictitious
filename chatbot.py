@@ -1,9 +1,8 @@
 import nltk.sentiment
-from chatterbot import ChatBot
 import csv
 import datetime
-from pythonosc import osc_message_builder
-from pythonosc import udp_client
+from chatterbot import ChatBot
+from pythonosc import osc_message_builder, udp_client
 
 
 def run_Bot(text):
