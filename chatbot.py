@@ -1,11 +1,9 @@
-import nltk
-import operator
+import nltk.sentiment
+from chatterbot import ChatBot
 import csv
 import datetime
-from chatterbot import ChatBot
 from pythonosc import osc_message_builder
 from pythonosc import udp_client
-from nltk.sentiment import SentimentIntensityAnalyzer
 
 
 def run_Bot(text):
@@ -43,7 +41,7 @@ chatbot.train("chatterbot.corpus.english")
 nltk.download('vader_lexicon')
 
 # Set up sentiment analyzer.
-vader_analyzer = SentimentIntensityAnalyzer()
+vader_analyzer = nltk.sentiment.vader.SentimentIntensityAnalyzer()
 
 # Set up dict to log conversation.
 convo_log = {}
