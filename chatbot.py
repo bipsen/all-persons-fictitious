@@ -14,8 +14,6 @@ def run_Bot(text):
 
     # Get chatbot response from the user input.
     bot_response = chatbot.get_response(text).text
-
-    # Print response in bold.
     print(bot_response)
 
     # Get polarity score from chatbot response.
