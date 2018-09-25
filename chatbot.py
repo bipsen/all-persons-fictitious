@@ -58,7 +58,7 @@ while True:
     if user_response == 'exit':   # Exit on 'exit' string.
         
         # Save conversation log.
-        with open('conversation_log.csv','w') as f:
+        with open('conversation_log.csv','a') as f:
             w = csv.writer(f)
             w.writerows(convo_log.items())
         
