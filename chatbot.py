@@ -5,6 +5,7 @@ from chatterbot import ChatBot
 from pythonosc import osc_message_builder
 from pythonosc import udp_client
 from nltk.sentiment import SentimentIntensityAnalyzer
+import datetime
 
 
 def run_Bot(text):
@@ -60,9 +61,11 @@ while True:
         # Save conversation log.
         with open('conversation_log.csv','a') as f:
             w = csv.writer(f)
+            w.writerow(['NEW SESSION AT: '+ str(datetime.datetime.now())])
             w.writerows(convo_log.items())
         
         break
 
     else:
         run_Bot(user_response)
+        
