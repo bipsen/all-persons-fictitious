@@ -7,7 +7,7 @@ from pythonosc import osc_message_builder, udp_client
 
 def run_Bot(text):
     """This is the main function to run the chatbot, analyse
-    the responses with nltk and send OSC messages to pure data.
+    the responses with nltk and send OSC messages to Pure Data.
     """
 
     # Get chatbot response from the user input.
