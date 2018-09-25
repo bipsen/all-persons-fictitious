@@ -29,7 +29,7 @@ def run_Bot(text):
 
 # Set up chatbot.
 chatbot = ChatBot(
-    'Ron Obvious',
+    'Sentiment Music Bot',
     trainer='chatterbot.trainers.ChatterBotCorpusTrainer'
 )
 
