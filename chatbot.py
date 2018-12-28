@@ -69,13 +69,12 @@ def run_bot(text):
 
 
 # Set up database
-TABLE_NAME = 'conversation_log'  # name of the table to be created
-INPUT_COLUMN = 'input_column'  # name of the column
+TABLE_NAME = 'conversation_log' 
+INPUT_COLUMN = 'input_column'
 OUTPUT_COLUMN = 'output_column'
 CONVERSATION_DB = "conversation.db"
 if __name__ == '__main__':
     create_connection(CONVERSATION_DB)
-
 
 # Set up chatbot.
 CHATBOT = ChatBot(
@@ -102,6 +101,5 @@ while True:
     USER_RESPONSE = input("Talk ('exit' to exit): ")
     if USER_RESPONSE == 'exit':   # Exit on 'exit' string.
         break
-
     else:
         run_bot(USER_RESPONSE)
