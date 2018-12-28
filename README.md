@@ -1,4 +1,4 @@
-README# all-persons-fictitious
+# all-persons-fictitious
 
 In the project all-persons-fictitious, we’re trying to see what it would look like to have conversations with entities that respond in music. In our installation, you experience communicating with an artificial intelligence, that rather than reply in conventional words, responds in sound that you can hear. As you keep talking, you will hear the music change over time. 
 
