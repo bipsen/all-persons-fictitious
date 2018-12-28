@@ -34,11 +34,10 @@ def log_conversation(db_file, line):
     try:
         conn = sqlite3.connect(db_file)
         cur = conn.cursor()
-        sql_str = """INSERT INTO {tn} ({c1}, {c2}, {time}) VALUES ("{v1}", "{v2}", "{now}")""".\
-            format(tn=TABLE_NAME, c1=INPUT_COLUMN, c2=OUTPUT_COLUMN, time='time',
-                   v1=' '.join(line.keys()), v2=' '.join(line.values()),
-                   now=str(datetime.datetime.now()))
-        cur.execute(sql_str)
+        cur.execute("""INSERT INTO {tn} ({c1}, {c2}, {time}) VALUES ("{v1}", "{v2}", "{now}")""".
+                    format(tn=TABLE_NAME, c1=INPUT_COLUMN, c2=OUTPUT_COLUMN, time='time',
+                           v1=' '.join(line.keys()), v2=' '.join(line.values()),
+                           now=str(datetime.datetime.now())))
         conn.commit()
     except Error as err:
         print(err)
