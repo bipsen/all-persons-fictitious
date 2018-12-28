@@ -78,7 +78,7 @@ if __name__ == '__main__':
     create_connection(CONVERSATION_DB)
 
 
-# Set up CHATBOT.
+# Set up chatbot.
 CHATBOT = ChatBot(
     'Sentiment Music Bot',
     trainer='chatterbot.trainers.ChatterBotCorpusTrainer'
@@ -98,7 +98,7 @@ IP = 'localhost'
 PORT = 9000
 CLIENT = udp_client.SimpleUDPClient(IP, PORT)
 
-# Run the CHATBOT.
+# Run chatbot.
 while True:
     USER_RESPONSE = input("Talk ('exit' to exit): ")
     if USER_RESPONSE == 'exit':   # Exit on 'exit' string.
