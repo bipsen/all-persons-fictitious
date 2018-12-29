@@ -12,7 +12,7 @@ from pythonosc import udp_client
 
 
 def create_connection(db_file):
-    """ create a database connection to the SQLite database """
+    """ Create a database connection to the SQLite database """
     try:
         conn = sqlite3.connect(db_file)
         cur = conn.cursor()
