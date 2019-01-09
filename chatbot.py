@@ -2,7 +2,6 @@
 This is the main script
 """
 
-import csv
 import datetime
 import sqlite3
 from sqlite3 import Error
@@ -11,12 +10,12 @@ from chatterbot import ChatBot
 from pythonosc import udp_client
 
 
-def create_connection(db_file):
+def _create_connection(db_file):
     """ Create a database connection to the SQLite database """
     try:
         conn = sqlite3.connect(db_file)
         cur = conn.cursor()
-        
+
         # Create a new SQLite table
         cur.execute("CREATE TABLE {tn} ({r1}, {r2}, {time} {ft})"
                     .format(tn=TABLE_NAME, r1=INPUT_COLUMN, r2=OUTPUT_COLUMN,
@@ -29,7 +28,7 @@ def create_connection(db_file):
         conn.close()
 
 
-def log_conversation(db_file, line):
+def _log_conversation(db_file, line):
     """ Log conversation in SQLite database """
     try:
         conn = sqlite3.connect(db_file)
@@ -45,7 +44,7 @@ def log_conversation(db_file, line):
         conn.close()
 
 
-def run_bot(text):
+def main(text):
     """This is the main function to run the CHATBOT, analyse
     the responses with nltk and send OSC messages to Pure Data.
     """
@@ -65,41 +64,42 @@ def run_bot(text):
 
     # Log conversation.
     exchange = {text: bot_response}
-    log_conversation("conversation.db", exchange)
+    _log_conversation("conversation.db", exchange)
 
 
 # Set up database
-TABLE_NAME = 'conversation_log' 
+TABLE_NAME = 'conversation_log'
 INPUT_COLUMN = 'input_column'
 OUTPUT_COLUMN = 'output_column'
 CONVERSATION_DB = "conversation.db"
+
 if __name__ == '__main__':
-    create_connection(CONVERSATION_DB)
+    _create_connection(CONVERSATION_DB)
 
-# Set up chatbot.
-CHATBOT = ChatBot(
-    'Sentiment Music Bot',
-    trainer='chatterbot.trainers.ChatterBotCorpusTrainer'
-)
+    # Set up chatbot.
+    CHATBOT = ChatBot(
+        'Sentiment Music Bot',
+        trainer='chatterbot.trainers.ChatterBotCorpusTrainer'
+    )
 
-# Train based on the english corpus.
-CHATBOT.train("chatterbot.corpus.english")
+    # Train based on the english corpus.
+    CHATBOT.train("chatterbot.corpus.english")
 
-# Download lexicon for nltk.
-nltk.download('vader_lexicon')
+    # Download lexicon for nltk.
+    nltk.download('vader_lexicon')
 
-# Set up sentiment analyzer.
-VADER_ANALYZER = nltk.sentiment.vader.SentimentIntensityAnalyzer()
+    # Set up sentiment analyzer.
+    VADER_ANALYZER = nltk.sentiment.vader.SentimentIntensityAnalyzer()
 
-# Set up OSC client.
-IP = 'localhost'
-PORT = 9000
-CLIENT = udp_client.SimpleUDPClient(IP, PORT)
+    # Set up OSC client.
+    IP = 'localhost'
+    PORT = 9000
+    CLIENT = udp_client.SimpleUDPClient(IP, PORT)
 
-# Run chatbot.
-while True:
-    USER_RESPONSE = input("Talk ('exit' to exit): ")
-    if USER_RESPONSE == 'exit':   # Exit on 'exit' string.
-        break
-    else:
-        run_bot(USER_RESPONSE)
+    # Run chatbot.
+    while True:
+        USER_RESPONSE = input("Talk ('exit' to exit): ")
+        if USER_RESPONSE == 'exit':   # Exit on 'exit' string.
+            break
+        else:
+            main(USER_RESPONSE)
