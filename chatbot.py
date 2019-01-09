@@ -67,13 +67,13 @@ def main(text):
     _log_conversation("conversation.db", exchange)
 
 
-# Set up database
-TABLE_NAME = 'conversation_log'
-INPUT_COLUMN = 'input_column'
-OUTPUT_COLUMN = 'output_column'
-CONVERSATION_DB = "conversation.db"
-
 if __name__ == '__main__':
+    
+    # Set up database
+    TABLE_NAME = 'conversation_log'
+    INPUT_COLUMN = 'input_column'
+    OUTPUT_COLUMN = 'output_column'
+    CONVERSATION_DB = "conversation.db"
     _create_connection(CONVERSATION_DB)
 
     # Set up chatbot.
