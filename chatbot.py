@@ -23,6 +23,7 @@ def _create_connection(db_file):
 
     except Error as err:
         print(err)
+
     finally:
         conn.commit()
         conn.close()
@@ -38,8 +39,10 @@ def _log_conversation(db_file, line):
                            v1=' '.join(line.keys()), v2=' '.join(line.values()),
                            now=str(datetime.datetime.now())))
         conn.commit()
+
     except Error as err:
         print(err)
+
     finally:
         conn.close()
 
@@ -68,7 +71,7 @@ def main(text):
 
 
 if __name__ == '__main__':
-    
+
     # Set up database
     TABLE_NAME = 'conversation_log'
     INPUT_COLUMN = 'input_column'
@@ -79,8 +82,7 @@ if __name__ == '__main__':
     # Set up chatbot.
     CHATBOT = ChatBot(
         'Sentiment Music Bot',
-        trainer='chatterbot.trainers.ChatterBotCorpusTrainer'
-    )
+        trainer='chatterbot.trainers.ChatterBotCorpusTrainer')
 
     # Train based on the english corpus.
     CHATBOT.train("chatterbot.corpus.english")
